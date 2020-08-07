@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item
+        android:id="@+id/Category"
+        android:title="Category"
+        android:checkable="false"
+        />
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
+
+
+        <item
+            android:id="@+id/Men"
+            android:title="Men"
+            android:icon="@drawable/men"
+
+            />
+        <item
+            android:id="@+id/Women"
+            android:title="Women"
+            android:icon="@drawable/women"/>
+        <item
+            android:id="@+id/Kids"
+            android:title="Kids"
+            android:icon="@drawable/ic_child_care_black_24dp"/>
+
+    </group>
+
+
+    <item
+        android:id="@+id/General"
+        android:title="General"
+        android:checkable="false"
+        />
+
+    <group android:checkableBehavior="none"
+        android:id="@+id/group2">
+
+        <item
+            android:id="@+id/Profile"
+            android:title="Profile"
+            android:icon="@drawable/ic_perm_identity_black_24dp"
+        />
+
+        <item
+            android:id="@+id/Logout"
+            android:title="Logout"
+            android:icon="@drawable/ic_power_settings_new_black_24dp"
+            />
+    </group>
+
+</menu>

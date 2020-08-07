@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Women Shoes"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_marginTop="6dp"
+        android:layout_centerHorizontal="true"/>
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/women_grid_view"
+        android:numColumns="2"
+        android:verticalSpacing="1dp"
+        android:background="@drawable/gradient"
+        android:horizontalSpacing="1dp"
+        android:layout_marginTop="80dp"
+        />
+
+</RelativeLayout>

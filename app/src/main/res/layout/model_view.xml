@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/gridviewdata"
+        android:background="#ffffff"
+        android:layout_width="190dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="20dp"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:id="@+id/shoes_brand_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="GoShoes"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            />
+
+        <ImageView
+            android:id="@+id/shoes_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/logo_2" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

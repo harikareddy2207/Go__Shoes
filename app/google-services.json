@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "307621810582",
+    "firebase_url": "https://goshoes-97da0.firebaseio.com",
+    "project_id": "goshoes-97da0",
+    "storage_bucket": "goshoes-97da0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307621810582:android:50fc74ddb7f60d2fdccdb7",
+        "android_client_info": {
+          "package_name": "com.example.goshoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307621810582-dn1aegrk87fpbjpqm7de5k04gtsbtnet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF3MAY5GK8bGGuczcK7-jZS-WxHYnkI8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307621810582-dn1aegrk87fpbjpqm7de5k04gtsbtnet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

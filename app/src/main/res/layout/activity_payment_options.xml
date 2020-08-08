@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".PaymentOptions">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Choose Payment Method"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="50dp">
+
+
+        <RadioButton
+            android:id="@+id/creditdebitcard"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Credit / Debit Card"
+            android:textSize="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+
+        <RadioButton
+            android:id="@+id/cod"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Cash On Delivery"
+            android:textSize="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/continuepayment"
+        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:text="Continue"
+        android:textSize="25dp"
+        android:textColor="#18212A"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/button_background"/>
+
+
+</RelativeLayout>

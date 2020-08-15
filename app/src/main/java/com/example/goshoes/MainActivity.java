@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView forgotPassword;
     private EditText email,password;
     private ProgressDialog progressDialog;
+    private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         forgotPassword = findViewById(R.id.MainForgotPassword);
         email = findViewById(R.id.MainEmail);
         password = findViewById(R.id.MainPassword);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
 
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -97,10 +103,8 @@ public class MainActivity extends AppCompatActivity {
                     progressDialog.setMessage("Logging in...");
                     progressDialog.show();
                     email.setError(null);
-                    password.setError(null);Toast toast = Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-                    toast.show();
-                    startActivity(new Intent(MainActivity.this,HomePage.class));
+                    password.setError(null);
+                    validate(email.getText().toString(),password.getText().toString());
 
 
                 }
@@ -108,6 +112,59 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void validate(String userName,String userPassword)
+    {
+        firebaseAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+
+                if (task.isSuccessful())
+                {
+                    progressDialog.dismiss();
+                    checkEmailVerification();
+
+                }
+                else
+                    {
+                    progressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Enter Valid Username and Password", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(MainActivity.this, "Enter Valid Email and Password", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    private void checkEmailVerification()
+    {
+        progressDialog.setMessage("Logging in...");
+        progressDialog.show();
+        
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Boolean emailflag = firebaseUser.isEmailVerified();
+
+        if (emailflag)
+        {
+            progressDialog.dismiss();
+            Toast toast = Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+            startActivity(new Intent(MainActivity.this,HomePage.class));
+        }
+        else
+        {
+            progressDialog.dismiss();
+            Toast.makeText(MainActivity.this,"Need to Verify Email",Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(MainActivity.this,"Need to Verify Email",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+            firebaseAuth.signOut();
+        }
     }
 
 }

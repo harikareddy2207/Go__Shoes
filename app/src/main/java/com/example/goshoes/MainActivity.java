@@ -10,7 +10,10 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button login,signUp;
     private TextView forgotPassword;
+    private TextView textView1,textView2;
     private EditText email,password;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -47,8 +51,44 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.MainEmail);
         password = findViewById(R.id.MainPassword);
 
+        textView1 = (TextView)findViewById(R.id.visible);
+        textView2 = (TextView)findViewById(R.id.notvisible);
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+
+        password.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                textView1.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        textView1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+
+                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                textView1.setVisibility(View.INVISIBLE);
+                textView2.setVisibility(View.VISIBLE);
+            }
+        });
+
+        textView2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                textView2.setVisibility(View.INVISIBLE);
+                textView1.setVisibility(View.VISIBLE);
+            }
+        });
 
 
 
@@ -144,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
     {
         progressDialog.setMessage("Logging in...");
         progressDialog.show();
-        
+
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Boolean emailflag = firebaseUser.isEmailVerified();
 

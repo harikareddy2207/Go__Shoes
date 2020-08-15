@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,12 +36,20 @@ public class CreateAccount extends AppCompatActivity {
     private EditText user_name,user_email,user_pwd1,user_pwd2;
     private TextView v1,v2,iv1,iv2;
     private Button createbtn;
+    String name,email,password,repassword;
+    private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        progressDialog =new ProgressDialog(CreateAccount.this);
+        progressDialog.setMessage("Creating...");
+
 
         user_name = findViewById(R.id.CreateName);
         user_email = findViewById(R.id.CreateEmail);
@@ -51,6 +60,9 @@ public class CreateAccount extends AppCompatActivity {
         iv1 = findViewById(R.id.notvisible1);
         v2 = findViewById(R.id.visible2);
         iv2 = findViewById(R.id.notvisible2);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         user_pwd1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -118,11 +130,41 @@ public class CreateAccount extends AppCompatActivity {
                 }
                 else if (user_pwd1.getText().toString().trim().equals(user_pwd2.getText().toString().trim()))
                 {
-                    Toast toast = Toast.makeText(CreateAccount.this,"Account Created Successfully",Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-                    toast.show();
-                    Intent i = new Intent(CreateAccount.this,MainActivity.class);
-                    startActivity(i);
+                    progressDialog.show();
+                    name = user_name.getText().toString().trim();
+                    email = user_email.getText().toString().trim();
+                    password = user_pwd1.getText().toString().trim();
+                    repassword = user_pwd2.getText().toString().trim();
+                    firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                    {
+
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            if (task.isSuccessful())
+                            {
+                                progressDialog.dismiss();
+                                sendEmailVerification();
+                            }
+                            else
+                            {
+
+                                progressDialog.dismiss();
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException)
+                                {
+                                    Toast toast = Toast.makeText(CreateAccount.this,"User with this email already exist.",Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                                    toast.show();
+                                }
+                                else
+                                {
+                                    Toast toast = Toast.makeText(CreateAccount.this,"Enter Strong Password\n[ Including Text and Number ]",Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                                    toast.show();
+                                }
+                            }
+                        }
+                    });
+
                 }
                 else
                 {
@@ -135,6 +177,46 @@ public class CreateAccount extends AppCompatActivity {
             }
         });
     }
+
+    private  void sendEmailVerification()
+    {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null)
+        {
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>()
+            {
+                @Override
+                public void onComplete(@NonNull Task<Void> task)
+                {
+                    if (task.isSuccessful())
+                    {
+                        sendUserData();
+                        firebaseAuth.signOut();
+                        finish();
+                        Toast toast = Toast.makeText(CreateAccount.this,"Registration Completed.\nVerify Email",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                        startActivity(new Intent(CreateAccount.this,MainActivity.class));
+                    }
+                    else
+                    {
+                        Toast toast = Toast.makeText(CreateAccount.this,"Verification mail has not been sent",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void sendUserData()
+    {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference = firebaseDatabase.getReference().child("Users").child(firebaseAuth.getUid());
+        UserProfile userProfile = new UserProfile(email,name);
+        reference.setValue(userProfile);
+    }
+
 
 
 }

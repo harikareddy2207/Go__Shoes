@@ -42,6 +42,7 @@ public class KidsFragment extends Fragment {
                 intent.putExtra("image",kidsShoesImages[position]);
                 intent.putExtra("price",kidsShoesPrice[position]);
                 intent.putExtra("category",Category);
+                intent.putExtra("position",position);
                 startActivity(intent);
             }
 

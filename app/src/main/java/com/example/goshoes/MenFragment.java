@@ -44,6 +44,7 @@ public class MenFragment extends Fragment {
                 intent.putExtra("image",shoesImages[position]);
                 intent.putExtra("price",shoesPrice[position]);
                 intent.putExtra("category",Category);
+                intent.putExtra("position",position);
                 startActivity(intent);
             }
 

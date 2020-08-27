@@ -43,6 +43,7 @@ public class WomenFragment extends Fragment {
                 intent.putExtra("image",womenShoesImages[position]);
                 intent.putExtra("price",womenShoesPrice[position]);
                 intent.putExtra("category",Category);
+                intent.putExtra("position",position);
                 startActivity(intent);
 
             }

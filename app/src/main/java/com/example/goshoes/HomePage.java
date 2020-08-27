@@ -2,6 +2,7 @@ package com.example.goshoes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -12,18 +13,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomePage extends AppCompatActivity {
 
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nav;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
         nav = findViewById(R.id.nv);
         dl = findViewById(R.id.drawer_layout);
@@ -64,6 +68,9 @@ public class HomePage extends AppCompatActivity {
                         break;
 
                     case R.id.Logout :
+
+                        firebaseAuth.signOut();
+                        finish();
                         Intent intent = new Intent(HomePage.this, MainActivity.class);
                         startActivity(intent);
                         break;
@@ -93,6 +100,27 @@ public class HomePage extends AppCompatActivity {
             return true;
         }
 
+
+        int id = item.getItemId();
+
+        switch (id)
+        {
+
+            case R.id.cart:
+
+                startActivity(new Intent(HomePage.this,MyCartPage.class));
+                break;
+        }
+
+
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.option_menu,menu);
+        return true;
     }
 }

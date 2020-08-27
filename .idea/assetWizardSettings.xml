@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/private/var/folders/0c/f4n0b05s57114fl67y82ss080000gn/T/AppTranslocation/2A2233D9-3896-4F0B-80C0-D3211C718621/d/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialicons/perm_identity/baseline_perm_identity_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/shopping_cart/baseline_shopping_cart_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="18212a" />
-                            <entry key="outputName" value="ic_baseline_perm_identity_24" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_baseline_shopping_cart_24" />
+                            <entry key="sourceFile" value="C:\Users\Admin\Desktop\Project" />
                           </map>
                         </option>
                       </PersistentState>

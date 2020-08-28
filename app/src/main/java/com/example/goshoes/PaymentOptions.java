@@ -13,7 +13,6 @@ public class PaymentOptions extends AppCompatActivity {
 
     private Button btncontinue;
     private RadioButton rcreditdebit,rcod;
-    private RadioGroup group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,34 +22,35 @@ public class PaymentOptions extends AppCompatActivity {
         btncontinue = findViewById(R.id.continuepayment);
         rcreditdebit =findViewById(R.id.creditdebitcard);
         rcod = findViewById(R.id.cod);
-        group = findViewById(R.id.radioGroup);
 
         Intent intent = getIntent();
-        final String received_Name =  intent.getStringExtra("shoe_name");
-        final int received_Image = intent.getIntExtra("shoe_image",0);
-        final String received_Price =  intent.getStringExtra("shoe_price");
+        final String s =  intent.getStringExtra("shoe_quantity");
 
 
         btncontinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if (rcreditdebit.isChecked())
+                {
+                    Intent intent = new Intent(PaymentOptions.this, Payment.class);
+                    intent.putExtra("shoe_quantity",s);
+                    startActivity(intent);
+                }
+                else
+                {
+                    if (rcod.isChecked())
+                    {
+                        Intent intent = new Intent(PaymentOptions.this, PayConfirm.class);
+                        intent.putExtra("shoe_quantity",s);
+                        startActivity(intent);
+                    }
+                }
 
-                Intent intent = new Intent(PaymentOptions.this, Payment.class);
-                intent.putExtra("shoe_name",received_Name);
-                intent.putExtra("shoe_image",received_Image);
-                intent.putExtra("shoe_price",received_Price);
-                startActivity(intent);
+
 
             }
         });
     }
 
-    public void checkButton (View v)
-    {
-        int radioId = group.getCheckedRadioButtonId();
-
-        rcreditdebit = findViewById(radioId);
-        rcod = findViewById(radioId);
-    }
 }

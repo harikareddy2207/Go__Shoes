@@ -64,10 +64,10 @@ public class MyCartPage extends AppCompatActivity {
         checkoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String s = String.valueOf(quantity1);
                 Intent intent = new Intent(MyCartPage.this, PaymentOptions.class);
-                intent.putExtra("shoe_name",received_Name);
-                intent.putExtra("shoe_image",received_Image);
-                intent.putExtra("shoe_price",received_Price);
+                intent.putExtra("shoe_quantity",s);
                 startActivity(intent);
             }
         });

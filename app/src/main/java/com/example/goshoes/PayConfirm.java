@@ -61,12 +61,16 @@ public class PayConfirm extends AppCompatActivity {
 
                 CartDetails cartDetails = snapshot.getValue(CartDetails.class);
 
+                String s1 = cartDetails.getShoeprice();
+                int x = Integer.valueOf(s1.substring(1));
+                int y = Integer.valueOf(s);
+                String mix = String.valueOf(x*y);
 
 
                 if (cartDetails != null) {
 
                     name.setText(cartDetails.getShoename());
-                    price.setText(cartDetails.getShoeprice());
+                    price.setText("$"+mix);
                 }
                 else
                 {

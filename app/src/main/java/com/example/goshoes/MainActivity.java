@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
+        if (firebaseUser != null)
+        {
+            startActivity(new Intent(MainActivity.this,HomePage.class));
+            finish();
+        }
+
 
         password.setOnTouchListener(new View.OnTouchListener()
         {

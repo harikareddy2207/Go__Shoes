@@ -45,8 +45,6 @@ public class ForgotPassword extends AppCompatActivity {
                 Vibrator vb = (Vibrator)   getSystemService(Context.VIBRATOR_SERVICE);
                 vb.vibrate(20);
 
-                //mp.start();
-
                 if(email.length() == 0)
                 {
                     Toast toast = Toast.makeText(ForgotPassword.this,"Please Enter Email",Toast.LENGTH_LONG);

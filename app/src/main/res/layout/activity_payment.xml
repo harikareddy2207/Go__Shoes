@@ -36,6 +36,7 @@
             android:textColorHint="#ffffff"
             android:paddingLeft="10dp"
             android:maxLength="16"
+            android:inputType="number"
             android:background="@drawable/gradient"/>
 
         <EditText
@@ -49,7 +50,7 @@
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:paddingLeft="10dp"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:background="@drawable/gradient"/>
 
         <TextView

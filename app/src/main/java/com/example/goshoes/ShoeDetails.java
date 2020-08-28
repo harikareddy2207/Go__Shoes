@@ -123,8 +123,6 @@ public class ShoeDetails extends AppCompatActivity {
 
         }
 
-
-        //UploadTask uploadTask = imageReference.putFile(Uri.parse("android.resource://com.example.goshoes/" + mBitmapIds[i]));
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {

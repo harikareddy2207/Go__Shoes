@@ -43,13 +43,6 @@ public class MyCartPage extends AppCompatActivity {
         setContentView(R.layout.activity_my_cart_page);
 
 
-
-        Intent intent = getIntent();
-        final String received_Name =  intent.getStringExtra("shoe_name");
-        final int received_Image = intent.getIntExtra("shoe_image",0);
-        final String received_Price =  intent.getStringExtra("shoe_price");
-
-
         btn1 = findViewById(R.id.minusbtn);
         btn2 = findViewById(R.id.plusbtn);
         checkoutbtn = findViewById(R.id.checkout);

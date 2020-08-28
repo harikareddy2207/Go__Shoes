@@ -165,8 +165,6 @@ public class CreateAccount extends AppCompatActivity {
                 Vibrator vb = (Vibrator)   getSystemService(Context.VIBRATOR_SERVICE);
                 vb.vibrate(20);
 
-                //mp.start();
-
 
                 if (user_name.getText().toString().trim().length()==0 || user_email.getText().toString().trim().length()==0 || user_pwd1.getText().toString().trim().length()==0 || user_pwd2.getText().toString().trim().length()==0 || imagePath == null)
                 {

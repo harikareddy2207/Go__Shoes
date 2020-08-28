@@ -54,6 +54,15 @@ public class PayConfirm extends AppCompatActivity {
         Intent intent = getIntent();
         final String s =  intent.getStringExtra("shoe_quantity");
 
+        StorageReference storageReference = firebaseStorage.getReference();
+        storageReference.child("Cart Shoe Image").child(firebaseAuth.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+            @Override
+            public void onSuccess(Uri uri) {
+
+                Picasso.get().load(uri).into(confirm_image);
+            }
+        });
 
         childreference.addValueEventListener(new ValueEventListener() {
             @Override

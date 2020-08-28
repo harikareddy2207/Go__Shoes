@@ -30,7 +30,7 @@ class KidsCustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_view,parent,false);
-        //getting view in row_data
+
         TextView name = view1.findViewById(R.id.shoes_brand_name);
         ImageView image = view1.findViewById(R.id.shoes_image);
 

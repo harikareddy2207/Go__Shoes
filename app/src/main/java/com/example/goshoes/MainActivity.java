@@ -118,13 +118,9 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vb = (Vibrator)   getSystemService(Context.VIBRATOR_SERVICE);
                 vb.vibrate(20);
 
-                //mp.start();
-
-
                 if (email.getText().toString().trim().length() == 0)
                 {
                     email.setError("Email Id Required");
-                    //Toast.makeText(MainActivity.this,"Enter Email",Toast.LENGTH_LONG).show();
                     Toast toast = Toast.makeText(MainActivity.this,"Enter Email",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();
@@ -133,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 {
                     email.setError(null);
                     password.setError("Password Required");
-                    //Toast.makeText(MainActivity.this,"Enter Password",Toast.LENGTH_LONG).show();
                     Toast toast = Toast.makeText(MainActivity.this,"Enter Password",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();

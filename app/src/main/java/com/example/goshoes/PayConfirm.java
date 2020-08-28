@@ -1,6 +1,7 @@
 package com.example.goshoes;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -9,13 +10,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class PayConfirm extends AppCompatActivity {
 
     private TextView name,price;
     private Button confirmbtn;
     private ImageView confirm_image;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseStorage firebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +43,46 @@ public class PayConfirm extends AppCompatActivity {
         confirm_image = findViewById(R.id.confirm_imageview);
         confirmbtn = findViewById(R.id.confirm_button);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
+
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        DatabaseReference childreference = databaseReference.child("Cart Details").child(firebaseAuth.getUid());
+
+
         Intent intent = getIntent();
-        final String received_Name =  intent.getStringExtra("shoe_name");
-        final int received_Image = intent.getIntExtra("shoe_image",0);
-        final String received_Price =  intent.getStringExtra("shoe_price");
+        final String s =  intent.getStringExtra("shoe_quantity");
 
-        price.setText(received_Price);
-        name.setText(received_Name);
-        confirm_image.setImageResource(received_Image);
 
+        childreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                CartDetails cartDetails = snapshot.getValue(CartDetails.class);
+
+
+
+                if (cartDetails != null) {
+
+                    name.setText(cartDetails.getShoename());
+                    price.setText(cartDetails.getShoeprice());
+                }
+                else
+                {
+                    name.setText("");
+                    price.setText("");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast toast = Toast.makeText(PayConfirm.this,"Something Wrong",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        });
 
 
         confirmbtn.setOnClickListener(new View.OnClickListener() {

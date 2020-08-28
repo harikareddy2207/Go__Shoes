@@ -32,6 +32,7 @@ public class MyCartPage extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
+    int quantity1=1;
 
 
 
@@ -78,10 +79,7 @@ public class MyCartPage extends AppCompatActivity {
         brand_name = findViewById(R.id.shoe_cart_brandname);
 
         t1.setText("1");
-        //shoe_price.setText(received_Price);
-        //brand_name.setText(received_Name);
-        //cart_imageview.setImageResource(received_Image);
-
+        
         StorageReference storageReference = firebaseStorage.getReference();
         storageReference.child("Cart Shoe Image").child(firebaseAuth.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 
@@ -119,6 +117,44 @@ public class MyCartPage extends AppCompatActivity {
                 toast.show();
             }
         });
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                decrement1();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                increment1();
+            }
+        });
+
+    }
+
+
+    public void increment1 () {
+        quantity1 = quantity1 + 1;
+        display1(quantity1);
+    }
+
+    public void decrement1 () {
+        if (quantity1>0){
+            quantity1 = quantity1 - 1;
+            display1(quantity1);
+        }
+        else
+        {
+            display1(quantity1);
+        }
+    }
+
+    private void display1(int number) {
+
+        t1.setText("" + number);
 
     }
 
